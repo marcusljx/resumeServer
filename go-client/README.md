@@ -27,8 +27,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [InlineResponse201](docs/InlineResponse201.md)
  - [Job](docs/Job.md)
+ - [ResumeAdded](docs/ResumeAdded.md)
  - [ResumeObject](docs/ResumeObject.md)
 
 

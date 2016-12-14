@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **AddResume**
-> InlineResponse201 AddResume($inventoryItem)
+> ResumeAdded AddResume($resumeObject)
 
 adds a resume
 
@@ -19,11 +19,11 @@ Adds a resume to the system
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **inventoryItem** | [**ResumeObject**](ResumeObject.md)| Inventory item to add | [optional] 
+ **resumeObject** | [**ResumeObject**](ResumeObject.md)| Resume to add | [optional] 
 
 ### Return type
 
-[**InlineResponse201**](inline_response_201.md)
+[**ResumeAdded**](ResumeAdded.md)
 
 ### Authorization
 
