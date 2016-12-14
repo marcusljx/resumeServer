@@ -57,8 +57,8 @@ paths:
       - "application/json"
       parameters:
       - in: "body"
-        name: "inventoryItem"
-        description: "Inventory item to add"
+        name: "ResumeObject"
+        description: "Resume to add"
         required: false
         schema:
           $ref: "#/definitions/ResumeObject"
@@ -66,7 +66,7 @@ paths:
         201:
           description: "Resume successfully added"
           schema:
-            $ref: "#/definitions/inline_response_201"
+            $ref: "#/definitions/ResumeAdded"
         400:
           description: "invalid input, object invalid"
 definitions:
@@ -104,7 +104,7 @@ definitions:
         type: "string"
         example: "Acronis Asia Research and Development"
         description: "Name of Company"
-  inline_response_201:
+  ResumeAdded:
     properties:
       resumeID:
         type: "string"
