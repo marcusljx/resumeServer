@@ -1,13 +1,28 @@
 package server
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
-)
 
-type Admins struct {
-}
+	uuid "github.com/satori/go.uuid"
+)
 
 func AddResume(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+
+	var resume ResumeObject
+	err := json.NewDecoder(r.Body).Decode(&resume)
+	defer r.Body.Close()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+
+	// Add to localDB
+	id := uuid.NewV1()
+	localDB[id.String()] = resume
+
+	// if no errors
+	fmt.Fprint(w, id.String())
 }

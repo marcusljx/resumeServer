@@ -1,6 +1,7 @@
 package server
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -14,7 +15,7 @@ func GetResume(w http.ResponseWriter, r *http.Request) {
 	resumeID := values["resumeID"]
 
 	if data, ok := localDB[resumeID]; ok {
-		fmt.Fprint(w, data)
+		json.NewEncoder(w).Encode(data)
 	} else {
 		http.Error(w, fmt.Sprintf("Resume with ID [%s] not found", resumeID), http.StatusNotFound)
 	}
