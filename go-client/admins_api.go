@@ -52,10 +52,10 @@ func NewAdminsApiWithBasePath(basePath string) *AdminsApi {
  * adds a resume
  * Adds a resume to the system
  *
- * @param inventoryItem Inventory item to add
- * @return *InlineResponse201
+ * @param resumeObject Resume to add
+ * @return *ResumeAdded
  */
-func (a AdminsApi) AddResume(inventoryItem ResumeObject) (*InlineResponse201, *APIResponse, error) {
+func (a AdminsApi) AddResume(resumeObject ResumeObject) (*ResumeAdded, *APIResponse, error) {
 
 	var localVarHttpMethod = strings.ToUpper("Post")
 	// create path and map variables
@@ -91,8 +91,8 @@ func (a AdminsApi) AddResume(inventoryItem ResumeObject) (*InlineResponse201, *A
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	localVarPostBody = &inventoryItem
-	var successPayload = new(InlineResponse201)
+	localVarPostBody = &resumeObject
+	var successPayload = new(ResumeAdded)
 	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 
 	var localVarURL, _ = url.Parse(localVarPath)

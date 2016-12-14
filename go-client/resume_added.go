@@ -22,7 +22,7 @@
 
 package swagger
 
-type InlineResponse201 struct {
+type ResumeAdded struct {
 
 	ResumeID string `json:"resumeID,omitempty"`
 }

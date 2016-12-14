@@ -1,4 +1,4 @@
-# InlineResponse201
+# ResumeAdded
 
 ## Properties
 Name | Type | Description | Notes
