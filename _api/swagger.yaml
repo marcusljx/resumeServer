@@ -1,0 +1,112 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a Resume API"
+  version: "1.0.0"
+  title: "Simple Resume API"
+  contact:
+    email: "marcusljx@grab.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "dev"
+  description: "Operations available to regular developers"
+- name: "public"
+  description: "Operations available to public (exposed API calls)"
+schemes:
+- "https"
+paths:
+  /getResume/{resumeID}:
+    get:
+      tags:
+      - "public"
+      summary: "Returns resume"
+      description: "Returns a resume based on ID."
+      operationId: "getResume"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "resumeID"
+        in: "path"
+        description: "ID of resume to obtain"
+        required: true
+        type: "string"
+        format: "uuid"
+      responses:
+        200:
+          description: "Return resume"
+          schema:
+            $ref: "#/definitions/ResumeObject"
+        404:
+          description: "Resume with ID [{resumeID}] not found"
+  /uploadResumeDetails:
+    post:
+      tags:
+      - "admins"
+      summary: "adds a resume"
+      description: "Adds a resume to the system"
+      operationId: "addResume"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "inventoryItem"
+        description: "Inventory item to add"
+        required: false
+        schema:
+          $ref: "#/definitions/ResumeObject"
+      responses:
+        201:
+          description: "Resume successfully added"
+          schema:
+            $ref: "#/definitions/inline_response_201"
+        400:
+          description: "invalid input, object invalid"
+definitions:
+  ResumeObject:
+    type: "object"
+    required:
+    - "currentJob"
+    - "name"
+    - "previousJobs"
+    properties:
+      name:
+        type: "string"
+        description: "Name of Candidate"
+      currentJob:
+        $ref: "#/definitions/Job"
+      previousJobs:
+        type: "array"
+        items:
+          $ref: "#/definitions/Job"
+  Job:
+    type: "object"
+    required:
+    - "company"
+    - "title"
+    properties:
+      title:
+        type: "string"
+        example: "Software Engineer in Test"
+        description: "Title of job"
+      description:
+        type: "string"
+        example: "Development of Test Automation routines and infrastructure."
+        description: "Description about the job scope, responsibilities, etc."
+      company:
+        type: "string"
+        example: "Acronis Asia Research and Development"
+        description: "Name of Company"
+  inline_response_201:
+    properties:
+      resumeID:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
