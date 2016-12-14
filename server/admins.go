@@ -9,8 +9,6 @@ import (
 )
 
 func AddResume(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
 
 	var resume ResumeObject
 	err := json.NewDecoder(r.Body).Decode(&resume)
@@ -24,5 +22,7 @@ func AddResume(w http.ResponseWriter, r *http.Request) {
 	localDB[id.String()] = resume
 
 	// if no errors
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, id.String())
 }
